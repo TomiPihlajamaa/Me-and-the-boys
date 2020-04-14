@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>amazing world</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+    <h2>Koronaviruksen vaikutukset</h2>
+
+
+    <p>Koronaviruksen aiheuttamien muutosten vaikutus yleiseen elämään ja käyttäytymiseen.<br>
+        Lomakkeella kartoitetaan tietoa ihmisten elämästä.<br>
+        Kysymyksen tuloksia ei julkaista missään vaan jäävät vain tutkimuskäyttöön</p>
+
+    <h3>Ikä</h3>
+
+
+    <form>
+        <input type="radio" id="16" name="ika" value="16">
+        <label for="male">16-22</label><br>
+        <input type="radio" id="23" name="ika" value="23">
+        <label for="female">23-30</label><br>
+        <input type="radio" id="30" name="ika" value="30">
+        <label for="other">30-37</label><br>
+        <input type="radio" id="38" name="ika" value="38">
+        <label for="other">38-45</label>
+    </form>
+
+
+
+    <h3>Sukupuoli</h3>
+
+    <form>
+        <input type="radio" id="male" name="gender" value="mies">
+        <label for="male">Mies</label><br>
+        <input type="radio" id="female" name="gender" value="nainen">
+        <label for="female">Nainen</label><br>
+        <input type="radio" id="other" name="gender" value="muu">
+        <label for="other">Muu</label>
+    </form>
+
+    <h3>Onko korona vaikuttanut elämääsi?</h3>
+    <form>
+        <input type="radio" id="kyllä" name="vastaus" value="kyllä">
+        <label for="male">Kyllä</label><br>
+        <input type="radio" id="ei" name="vastaus" value="ei">
+        <label for="female">Ei</label><br>
+    </form>
+
+    <h3>Koronan vaikutukset työ- ja opiskeluelämässä?</h3>
+    <form action="/action_page.php">
+        <input type="checkbox" id="vaikutus" name="vaikutus" value="Bike">
+        <label for="vaikutus"> Lomautettu</label><br>
+        <input type="checkbox" id="vaikutus1" name="vaikutus1" value="Car">
+        <label for="vaikutus1"> Etätyö</label><br>
+        <input type="checkbox" id="vaikutus2" name="vaikutus2" value="Boat">
+        <label for="vaikutus2"> Etäopiskelu</label><br>
+        <input type="checkbox" id="vaikutus3" name="vaikutus3" value="Boat">
+        <label for="vaikutus3"> Ei vaikutusta</label><br><br>
+
+    </form>
+
+    <h3>Muita vaikutuksia?</h3>
+
+    <textarea rows="4" cols="50" name="comment" form="usrform">
+Kerro jotain...</textarea>
+    <br> <br>
+
+
+
+    <input type="submit" value="Submit">
+
+</body>
+
+</html>
