@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Kyselylomake</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div>
+    </div>
+
+    <p>
+
+        <input type="submit" value="Submit">
+    </p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $.getJSON("lomake.json", function(data) {
+            var items = [];
+
+            items.push("<h1>" + data.otsikko + "<h1>")
+            items.push("<h2>" + data.prologi + "<h2>")
+
+            var kysymykset = data.kysymykset;
+
+
+            $.each(kysymykset, function(key, d) {
+                items.push("<h3>" + d.kysymys + "<h3>");
+                items.push("<input type=text id=" + d.ID + " >");
+            });
+            $("div").append(items.join(""));
+        });
+
+    </script>

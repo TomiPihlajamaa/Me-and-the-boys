@@ -1,0 +1,36 @@
+{
+    "kyselyn_id": "kysely1",
+    "otsikko": "Harjoitus",
+    "prologi": "Tähän se prologi",
+    "kysymykset":
+
+
+[{
+                "kysymys": "Minkä ikäinen olet?",
+                "ID": "k1"
+}, {
+
+                "kysymys": "Sukupuoli?",
+                "ID": "k2"
+
+},
+            {
+                "kysymys": "Onko korona vaikuttanut elämääsi?",
+                "ID": "k3"
+
+ },
+            {
+                "kysymys": "Koronan vaikutukset työ- ja opiskelijaelämässä?",
+                "ID": "k4",
+                "tyyppi": "radio",
+                "value": ["tähän bokseja", "ja tähän", "sekä tähän"]
+ },
+            {
+                "kysymys": "Muita vaikutuksia?",
+                "ID": "k5",
+                "tyyppi": "text"
+
+ }
+
+]
+}
