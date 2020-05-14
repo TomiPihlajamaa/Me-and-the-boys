@@ -1,32 +1,38 @@
 body {
     background-image: url(tausta.jpg);
     font-family: 'Open Sans Condensed', sans-serif;
-    text-align: center;
+
 
 }
 
-h1 {font-size: 70px;}
+h1 {
+    font-size: 70px;
+}
 
-h2 {font-size: 30px;}
+h2 {
+    font-size: 30px;
+}
 
 .nappula {
 
-background: #b07faa;
+    background: #b07faa;
 
-color: white;
+    color: white;
 
-border-style: outset;
+    border-style: outset;
 
-border-color: #0066A2;
+    border-color: #0066A2;
 
-height: 50px;
+    height: 50px;
 
-width: 100px;
+    width: 100px;
 
-font: bold 15px arial, sans-serif;
+    font: bold 15px arial, sans-serif;
 
-text-shadow:none;
-    
-border-radius: 20px;    
+    text-shadow: none;
+
+    border-radius: 20px;
 
 }
+
+.vaihtoehdot

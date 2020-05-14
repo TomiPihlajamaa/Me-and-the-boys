@@ -2,6 +2,22 @@
 <html>
 
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165593561-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-165593561-1');
+
+    </script>
+
+
     <title>Kyselylomake</title>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,14 +31,43 @@
     </div>
 
     <p>
+        <input type="submit" value="Lähetä" class="nappula" onclick="laheta()">
 
-        <input type="submit" value="Lähetä" class="nappula">
+
+
     </p>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
     <script>
-        $.getJSON("lomake.json", function(data) {
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDmOWtEslu8O9xuqX3N1t4iT66S_gWX97Q",
+            authDomain: "vastaukset-6f14d.firebaseapp.com",
+            databaseURL: "https://vastaukset-6f14d.firebaseio.com",
+            projectId: "vastaukset-6f14d",
+            storageBucket: "vastaukset-6f14d.appspot.com",
+            messagingSenderId: "58097931590",
+            appId: "1:58097931590:web:c070343d65cec75ca64147",
+            measurementId: "G-X9YTHX6GNK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        var db = firebase.firestore();
+        var lomakekentta = [];
+
+        $.getJSON("http://myy.haaga-helia.fi/~bgh333/lomake-digiprojekti/lomake.json", function(data) {
             var items = [];
 
             items.push("<h1>" + data.otsikko + "<h1>")
@@ -33,9 +78,155 @@
 
             $.each(kysymykset, function(key, d) {
                 items.push("<h3>" + d.kysymys + "<h3>");
-                items.push("<input type=text id=" + d.ID + " >");
+
+                if (d.tyyppi == "text") {
+                    items.push("<textarea rows=3 type=text id=" + d.id + " ></textarea>");
+
+                    lomakekentta.push(d.id);
+
+                    // kysymyksen ja lomake-elementin vieminen items-taulukkoon 
+
+                }
+                if (d.tyyppi == "radio") {
+                    lomakekentta.push(d.id);
+                    items.push("<div class=vaihtoehdot >");
+                    for (i = 0; i < d.value.length; i++) {
+                        items.push("<input type=" + d.tyyppi + " id= " + d.id + " name=" + d.id + " value=" + d.value[i] + ">" + d.value[i] + "<br>");
+                    }
+                    items.push("</div>")
+                }
+
+
+                // kysymyksen ja lomake-elementin vieminen items-taulukkoon 
+
+
+                if (d.tyyppi == "checkbox") {
+                    lomakekentta.push(d.id);
+                    items.push("<div class=vaihtoehdot >");
+
+                    for (i = 0; i < d.value.length; i++) {
+                        items.push("<input type=" + d.tyyppi + " id= " + d.id + " name=" + d.id + " value=" + d.value[i] + ">" + d.value[i] + "<br>");
+                    }
+                    items.push("</div>")
+                }
+
+
+                // kysymyksen ja lomake-elementin vieminen items-taulukkoon 
+
+
+
+
+
+
             });
             $("div").append(items.join(""));
         });
 
+
+        function laheta() {
+
+            for (i = 0; i < lomakekentta.length; i++) {
+
+                var id = lomakekentta[i];
+                var tyyppi = document.getElementById(lomakekentta[i]).type;
+                var vastaus = "";
+
+                if (tyyppi == "textarea") {
+
+                    vastaus = document.getElementById(id).value;
+
+                    db.collection("vastaukset")
+                        .add({
+                            kysymys_id: lomakekentta[i],
+                            vastaus: vastaus
+                        })
+                        .then(function(docRef) {
+                            console.log("Document written with ID: ", docRef.id);
+                            location.reload(); //päivittää sivun
+                        })
+                        .catch(function(error) {
+                            console.error("Error adding document: ", error);
+                        });
+
+
+
+                }
+                if (tyyppi == "radio") {
+
+                    var radios = document.getElementsByName(lomakekentta[i]);
+                    for (var x = 0, length = radios.length; x < length; x++) {
+                        if (radios[x].checked) {
+                            vastaus = radios[x].value;
+
+
+
+                            db.collection("vastaukset")
+                                .add({
+                                    kysymys_id: lomakekentta[i],
+                                    vastaus: vastaus
+                                })
+                                .then(function(docRef) {
+                                    console.log("Document written with ID: ", docRef.id);
+                                    location.reload(); //päivittää sivun
+                                })
+                                .catch(function(error) {
+                                    console.error("Error adding document: ", error);
+
+
+
+
+                                });
+
+                        }
+                    }
+
+
+
+                }
+                if (tyyppi == "checkbox") {
+
+                    var radios2 = document.getElementsByName(lomakekentta[i]);
+                    for (var x = 0, length = radios2.length; x < length; x++) {
+                        if (radios2[x].checked) {
+                            vastaus = radios2[x].value;
+
+
+
+                            db.collection("vastaukset")
+                                .add({
+                                    kysymys_id: lomakekentta[i],
+                                    vastaus: vastaus
+                                })
+                                .then(function(docRef) {
+                                    console.log("Document written with ID: ", docRef.id);
+                                    location.reload(); //päivittää sivun
+                                })
+                                .catch(function(error) {
+                                    console.error("Error adding document: ", error);
+                                });
+
+                        }
+                    }
+
+
+                };
+
+
+            }
+
+
+
+
+
+
+
+
+
+            window.open("http://myy.haaga-helia.fi/~bgh333/vastauskansio/vastaus.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+
+
+        }
+
     </script>
+
+</body>

@@ -1,36 +1,43 @@
 {
     "kyselyn_id": "kysely1",
     "otsikko": "Koronaviruksen vaikutukset",
-    "prologi": "Kysely liittyen koronan vaikutuksiin arkielämässä - kaikki vastaukset tallennetaan ainoastaan tiedon kartoittamista varten, eikä niitä jaeta mihinkään.",
+    "prologi": "Kysely liittyen koronan vaikutuksiin arkielämässä <br> Kaikki vastaukset tallennetaan ainoastaan tiedon <br> kartoittamista varten, eikä niitä jaeta mihinkään.",
     "kysymykset":
 
 
 [{
                 "kysymys": "Minkä ikäinen olet?",
-                "ID": "k1"
+                "id": "k1",
+                "tyyppi": "radio",
+                "value": ["16-22", "23-30", "30-37", "38-45"]
 }, {
 
                 "kysymys": "Sukupuoli?",
-                "ID": "k2"
+                "id": "k2",
+                "tyyppi": "radio",
+                "value": ["Mies", "Nainen", "Muu"]
 
 },
             {
                 "kysymys": "Onko korona vaikuttanut elämääsi?",
-                "ID": "k3"
+                "id": "k3",
+                "tyyppi": "radio",
+                "value": ["Kyllä", "Ei"]
 
  },
             {
                 "kysymys": "Koronan vaikutukset työ- ja opiskelijaelämässä?",
-                "ID": "k4",
-                "tyyppi": "radio",
-                "value": ["tähän bokseja", "ja tähän", "sekä tähän"]
- },
+                "id": "k4",
+                "tyyppi": "checkbox",
+                "value": ["Lomautettu", "Etätyö", "Etäopiskelu", "Ei vaikutusta"]
+            },
             {
                 "kysymys": "Muita vaikutuksia?",
-                "ID": "k5",
+                "id": "k5",
                 "tyyppi": "text"
 
  }
+
 
 ]
 }
