@@ -1,0 +1,21 @@
+body {
+    background-image:url(tausta.jpg);
+        font-family: 'Open Sans Condensed', sans-serif;
+    
+    display: block;
+    margin: 8px;
+    
+}
+
+.yhteenveto {
+    
+    
+}
+
+.pallura {
+    text-align: center;
+}
+
+h1 {font-size: 80px}
+
+p {font-size: 30px}
