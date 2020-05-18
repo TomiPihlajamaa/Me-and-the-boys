@@ -1,0 +1,120 @@
+<!doctype html>
+
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load Charts and the corechart package.
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+
+        // Draw the pie chart for Sarah's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawSarahChart);
+
+        // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawAnthonyChart);
+
+        // Callback that draws the pie chart for Sarah's pizza.
+        function drawSarahChart() {
+
+            // Create the data table for Sarah's pizza.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['Mies', 3],
+                ['Nainen', 2],
+                ['Muu', 1],
+            ]);
+
+            // Set options for Sarah's pie chart.
+            var options = {
+                title: 'Sukupuolijakauma',
+                width: 400,
+                height: 300,
+                colors: ['#15ed1d', '#ea0c0c', '#5814f0', '#101010', '#080808']
+            };
+
+            // Instantiate and draw the chart for Sarah's pizza.
+            var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+            chart.draw(data, options);
+        }
+
+        // Callback that draws the pie chart for Anthony's pizza.
+        function drawAnthonyChart() {
+
+            // Create the data table for Anthony's pizza.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['16-22', 3],
+                ['23-30', 2],
+                ['30-37', 1],
+                ['38-45', 1],
+
+            ]);
+
+            // Set options for Anthony's pie chart.
+            var options = {
+                title: 'Ikäjakauma',
+                width: 400,
+                height: 300,
+                colors: ['#15ed1d', '#ea0c0c', '#5814f0', '#101010', '#080808']
+            };
+
+            // Instantiate and draw the chart for Anthony's pizza.
+            var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+            chart.draw(data, options);
+        }
+
+    </script>
+</head>
+
+<body>
+    <!--Table and divs that hold the pie charts-->
+    <table class="columns">
+        <tr>
+            <td>
+                <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
+            </td>
+            <td>
+                <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <div id="vastaukset"></div>
+
+    <script>
+        $.getJSON("http://www.mocky.io/v2/5eba80772f000049183c38db", function(data) {
+            var items = [];
+            $.each(data, function(key, d) {
+                var vastaus = d.vastaus;
+                items.push("<h3>Vastaukset</h3>");
+                $.each(vastaus, function(key2, d2) {
+                    items.push("<p>" + d2 + "</p>");
+                });
+            });
+
+
+            // tulostus sivulle
+            $("#vastaukset").append(items.join(""));
+        })
+
+    </script>
+
+
+
+</body>
+
+</html>
